@@ -14,12 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Function that sets listeners up to execute functions when requirements are met. Used to keep Js out of HTML document.
 function setUpListeners(){
-document.getElementById("add_destination_button").addEventListener('click', function() {addDestination_onClick();});
-document.getElementById("remove_destination_button").addEventListener('click', function() {removeDestination_onClick();});
+document.getElementById("add_destination_button").addEventListener('click', function() {addDestination_onClick(); destDistCalc();});
+document.getElementById("remove_destination_button").addEventListener('click', function() {removeDestination_onClick(); destDistCalc();});
 document.getElementById("fuel_calculate_button").addEventListener('click', function(){calculateFuel_onClick();});
 document.getElementById("save_trip_button").addEventListener('click', function(){store();});
 document.getElementById("get_trip_button").addEventListener('click', function(){getTrip();});
-document.getElementById("destination_calculation_button").addEventListener('click', function(){destDistCalc();});
+document.getElementById("destination_calculation_button").addEventListener('click', function(){returnToStart(); destDistCalc();});
+document.getElementById("theme_select").addEventListener('change', function(){changeTheme();});
+document.getElementById("close_window_button").addEventListener('click', function (){closeWindow();});
+document.getElementById("refresh_button").addEventListener('click', function(){refreshWindow();});
 }
 
 //Function that closes the window/exits the program
@@ -57,9 +60,10 @@ function addDestination_onClick() {
     li.appendChild(document.createTextNode(destination.value));
     destinationList.appendChild(li);
 
-    destinationArray.splice(destinationArray.length, 0, destination.value)
-    console.log(destinationArray)
+    destinationArray.splice(destinationArray.length, 0, destination.value);
+    console.log(destinationArray);
 }
+
 // Function that removes the user defined item from the destination list
 function removeDestination_onClick() {
 
@@ -70,13 +74,14 @@ function removeDestination_onClick() {
     destinationList.removeChild(selectedDestination);
 
      //Removes the item from the destination array to produce correct result
-    console.log(destinationArray);
+    
 
     const index = destinationArray.indexOf(destination.value);
     if (index > -1) {
     destinationArray.splice(index, 1);
+    console.log(destinationArray);
     }
-    console.log(destinationArray); 
+
 }
 
 //Function to calculate fuel cost of trip, currently requires all user input.
@@ -139,29 +144,26 @@ regardless of whether the user specified it in their destination list
 Error checking is also present within this function as well */
 function destDistCalc() {
 
-    let destList = destinationArray
-    let townList = places
-    let townDistance = distances
+    const destList = destinationArray;
+    const townList = places;
+    const townDistance = distances;
 
-    destinationArray.push(destinationArray[0])
-    console.log(destinationArray)
-
-    if(destList < 2){
-        alert('ERROR: Please input at least two locations for your trip')
-    }
-        i = 0
-        traveled = 0
+        i = 0;
+        traveled = 0;
         while((destList.length-1) > i) {
-            destination1 = townList.indexOf(destList[i])
-            destination2 = townList.indexOf(destList[(i+1)])
-            distance = townDistance[Number(destination1)]
-            traveled += distance[Number(destination2)]
-            i+=1
-            console.log(traveled, destination1, destination2, distance)
-            document.getElementById('output').innerHTML = 'The length of your trip is: ' + traveled + ' km'
+            destination1 = townList.indexOf(destList[i]);
+            destination2 = townList.indexOf(destList[(i+1)]);
+            distance = townDistance[Number(destination1)];
+            traveled += distance[Number(destination2)];
+            i+=1;
+            console.log(traveled, destination1, destination2, distance);
+            document.getElementById('output').innerHTML = 'The length of your trip is: ' + traveled + ' km';
             document.getElementById("distance_input").innerHTML = traveled;
         }
-    if(traveled == 0){
-        alert('please enter more than one location')
-    }
-    }
+}
+
+//Adds the first location of the itinerary to the end of the array to calculate a 'full round trip'
+function returnToStart(){
+    destinationArray.push(destinationArray[0]);
+    console.log(destinationArray);
+}

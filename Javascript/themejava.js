@@ -1,7 +1,7 @@
 function changeTheme(){
-    const themeSelect = document.getElementById('themeSelect');
+    const themeSelect = document.getElementById('theme_select');
     const themeStyleSheet = document.getElementById('themeStyleSheet');
     
     themeSelect.addEventListener('change', function(){
-        themeStyleSheet.setAttribute('href', this.value + ".css");
+        themeStyleSheet.setAttribute('href', "css/" + this.value + ".css");
     })};

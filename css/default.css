@@ -1,6 +1,3 @@
-body{
-    background: black;
-}
 * {
     box-sizing: border-box;
   }
@@ -28,11 +25,9 @@ body{
 .fuel_calculator_fs{
     border:solid darkorange 5px;
     float: right;
-    color: white;
 }
 .location_lists{
     border: solid darkorange 5px;
-    color: white;
 }
 #refresh_button{
     background-color: darkorange;
@@ -40,15 +35,29 @@ body{
 #close_window_button{
     background-color: darkorange;
 }
-h1{
-    color: white;
-}
-.navbar-brand{
-    color: white;
-}
-
 .navbar-logo{
-    color: white;
-    font-size: x-large;
-    padding: 0;
+color: white;
+font-size: x-large;
+padding: 0;
+}
+#theme_changer{
+  float: right;
+}
+#theme_select{
+  background-color: darkorange;
+}
+#add_destination_button{
+  background-color: darkorange;
+}
+#remove_destination_button{
+  background-color: darkorange;
+}
+#save_trip_button{
+  background-color: darkorange;
+}
+#get_trip_button{
+  background-color: darkorange;
+}
+#destination_calculation_button{
+  background-color: darkorange;
 }
